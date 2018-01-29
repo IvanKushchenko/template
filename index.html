@@ -1,0 +1,61 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge, chrome=1">
+        <title>Title</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Favicons -->
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <meta name="msapplication-config" content="browserconfig.xml" />
+        <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+
+        <link rel="stylesheet" href="style.css">
+
+        <!-- For Font Load -->
+        <style>
+            @font-face {
+                font-family: '{font}';
+                src: url('/fonts/{font}.woff') format('woff'),
+                url('/fonts/{font}.woff2') format('woff2');
+                font-weight: bold;
+            }
+            body {
+                font-family: Arial, sans-serif;
+            }
+            .fonts-loaded body {
+                font-family: '{font}';
+            }
+        </style>
+
+        <!-- Script For Font Loading -->
+        <script >
+            (function() {
+                // Optimization for Repeat Views
+                if (sessionStorage.fontsLoadedFoutWithClass) {
+                    document.documentElement.className += " fonts-loaded";
+                    return;
+                }
+                if ("fonts" in document) {
+                    Promise.all([
+                        // document.fonts.load("1em {font}"),
+                        // document.fonts.load("bold 1em {font}"),
+                    ]).then(function() {
+                        document.documentElement.className += " fonts-loaded";
+                        // Optimization for Repeat Views
+                        sessionStorage.fontsLoadedFoutWithClass = true;
+                    });
+                }
+            })();
+        </script>
+    </head>
+
+    <body>
+        <p>Hello world! This is HTML5 Boilerplate.</p>
+
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>
