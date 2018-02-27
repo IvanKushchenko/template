@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="ru">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge, chrome=1">
@@ -8,8 +8,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Favicons -->
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
-        <meta name="msapplication-config" content="browserconfig.xml" />
         <link rel="shortcut icon" type="image/png" href="favicon.png"/>
 
         <link rel="stylesheet" href="style.css">
@@ -30,24 +28,22 @@
             }
         </style>
 
+        <script src="js/vendor/fontfaceobserver.js"></script>
         <!-- Script For Font Loading -->
         <script >
             (function() {
-                // Optimization for Repeat Views
                 if (sessionStorage.fontsLoadedFoutWithClass) {
                     document.documentElement.className += " fonts-loaded";
                     return;
                 }
-                if ("fonts" in document) {
-                    Promise.all([
-                        // document.fonts.load("1em {font}"),
-                        // document.fonts.load("bold 1em {font}"),
-                    ]).then(function() {
-                        document.documentElement.className += " fonts-loaded";
-                        // Optimization for Repeat Views
-                        sessionStorage.fontsLoadedFoutWithClass = true;
-                    });
-                }
+                var font = new FontFaceObserver('{Font}');
+                var fontB = new FontFaceObserver('{FontB}');
+
+
+                Promise.all([font.load(), fontB.load()]).then(function() {
+                    sessionStorage.fontsLoadedFoutWithClass = true;
+                    document.documentElement.className += " fonts-loaded";
+                });
             })();
         </script>
     </head>

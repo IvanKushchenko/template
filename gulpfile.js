@@ -7,17 +7,40 @@ var sass = require('gulp-sass');
 var cssComb = require('gulp-csscomb');
 var spritesmith = require('gulp.spritesmith');
 var autoprefixer = require('gulp-autoprefixer');
+var htmlImport = require('gulp-html-import');
 
-gulp.task('default', function() {
-    gulp.run('concat', 'watch');
-});
-gulp.task('autoprefixer', function() {
-    gulp.src('style.css')
-        .pipe(autoprefixer({
-            browsers: ['last 4 versions'],
-        }))
+
+gulp.task('html', function(){
+    gulp.src('./templates/index.html')
+        .pipe(htmlImport('./templates/'))
         .pipe(gulp.dest('./'))
 });
+
+
+// Build
+gulp.task('build', function(){
+    // html, css
+    gulp.src(['./index.html', './style.css'])
+        .pipe(gulp.dest('docs'))
+    // Fonts
+    gulp.src(['./fonts/**.*'])
+        .pipe(gulp.dest('docs/fonts'))
+    // Images
+    gulp.src(['./img/**/*.*'])
+        .pipe(gulp.dest('img'))
+    // Scripts
+    gulp.src(['./js/main.js', './js/plugins.js'])
+        .pipe(gulp.dest('docs/js'))
+
+});
+
+// Build js
+gulp.task('buildjs', ['js'], function(){
+    gulp.run('uglify');
+    gulp.src(['./js/scripts.min.js'])
+        .pipe(gulp.dest('docs/js'))
+});
+
 
 // Concat all Plugins
 gulp.task('plugins', function() {
@@ -33,6 +56,14 @@ gulp.task('js', function() {
         .pipe(gulp.dest('js'))
 });
 
+gulp.task('autoprefixer', function() {
+    gulp.src('style.css')
+        .pipe(autoprefixer({
+            browsers: ['last 4 versions'],
+        }))
+        .pipe(gulp.dest('./'))
+});
+
 // Minify Main JS
 gulp.task('uglify', function() {
     return gulp.src('js/main.js')
@@ -43,15 +74,18 @@ gulp.task('uglify', function() {
         .pipe(gulp.dest('js'))
 });
 
+// Sass
 gulp.task('sass', function() {
     return gulp.src('sass/style.sass')
         .pipe(sass({
             outputStyle: 'expanded'
         }).on('error', sass.logError))
         // .pipe(cssComb())
-        // .pipe(autoprefixer())
+        .pipe(autoprefixer())
         .pipe(gulp.dest('./'))
+        .pipe(gulp.dest('docs'))
 });
+
 
 gulp.task('sprite', function() {
     var spriteData = gulp.src(['img/icons/*.png', 'img/icons/*.jpg']).pipe(spritesmith({
