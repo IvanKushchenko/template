@@ -1,0 +1,51 @@
+<!doctype html>
+<html class="no-js" lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge, chrome=1">
+        <title>Title</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Favicons -->
+        <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+
+        <link rel="stylesheet" href="style.css">
+
+        <!-- For Font Load -->
+        <style>
+            @font-face {
+                font-family: '{font}';
+                src: url('/fonts/{font}.woff') format('woff'),
+                url('/fonts/{font}.woff2') format('woff2');
+                font-weight: bold;
+            }
+            body {
+                font-family: Arial, sans-serif;
+            }
+            .fonts-loaded body {
+                font-family: '{font}';
+            }
+        </style>
+
+        <script src="js/vendor/fontfaceobserver.js"></script>
+        <!-- Script For Font Loading -->
+        <script >
+            (function() {
+                if (sessionStorage.fontsLoadedFoutWithClass) {
+                    document.documentElement.className += " fonts-loaded";
+                    return;
+                }
+                var font = new FontFaceObserver('{Font}');
+                var fontB = new FontFaceObserver('{FontB}');
+
+
+                Promise.all([font.load(), fontB.load()]).then(function() {
+                    sessionStorage.fontsLoadedFoutWithClass = true;
+                    document.documentElement.className += " fonts-loaded";
+                });
+            })();
+        </script>
+    </head>
+
+    <body>
