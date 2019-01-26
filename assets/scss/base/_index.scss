@@ -1,0 +1,11 @@
+@import "~normalize.css";
+@import "variables";
+
+button{
+	border: none;
+	box-shadow: none;
+	cursor: pointer;
+	&:focus{
+		outline: none;
+	}
+}
