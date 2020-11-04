@@ -1,0 +1,38 @@
+
+
+html{
+	height: 100%;
+	font-size: 62.5%;
+}
+
+body{
+	font-family: $ff-primary;
+	font-size: 1.6rem;
+	transition: none;
+}
+
+*{
+	transition: .3s;
+}
+
+a{
+	text-decoration: none;
+	&:hover{
+		text-decoration: none;
+	}
+}
+
+ul{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+button{
+	border: none;
+	box-shadow: none;
+	cursor: pointer;
+	&:focus{
+		outline: none;
+	}
+}

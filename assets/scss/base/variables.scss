@@ -1,2 +1,27 @@
-/* Colors */
+/*=============================================
+=            Colors            =
+=============================================*/
 
+/* Base */
+
+
+
+/* Components */
+
+
+/*=============================
+=            Fonts            =
+=============================*/
+
+$ff-primary: Arial, sans-serif;
+
+
+/*=============================================
+=            GRID           =
+=============================================*/
+
+$bp-sm: map-get($grid-breakpoints, "sm");
+$bp-md: map-get($grid-breakpoints, "md");
+$bp-lg: map-get($grid-breakpoints, "lg");
+$bp-xl: map-get($grid-breakpoints, "xl");
+$bp-xxl: "1400px";
